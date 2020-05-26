@@ -103,4 +103,4 @@ WHERE survived=1 AND pclass=2;
 print(query4)
 cursor.execute(query4)
 for row in cursor.fetchall():
-    print(f"Survived: {row['survived']}, Pclass: {row['pclass']}, Name: {row['name']}, Parents and Children Aboard: {row['parents_children_aboard']}")
+    print(f"Survived: {row['survived']}, Pclass: {row['pclass']}, Name: {row['name']}, Parents_Children_Aboard: {row['parents_children_aboard']}")
