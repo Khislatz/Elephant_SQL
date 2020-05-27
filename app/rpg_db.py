@@ -33,16 +33,16 @@ print("CONNECTION", type(connect_postgre))
 cursor_postgre = connect_postgre.cursor()
 print("CURSOR", type(cursor_postgre))
 
-tab_names=['charactercreator_character', 'charactercreator_character_inventory', 'charactercreator_cleric',
+tab_names = ['charactercreator_character', 'charactercreator_character_inventory', 'charactercreator_cleric',
 'charactercreator_fighter', 'charactercreator_mage', 'charactercreator_necromancer',
 'charactercreator_thief', 'armory_item', 'armory_weapon','auth_group', 'auth_group_permissions', 
 'auth_permission', 'auth_user', 'auth_user_groups', 'auth_user_user_permissions', 
 'django_admin_log', 'django_content_type', 'django_migrations', 'django_session', 'sqlite_sequence'] 
 
 tabnames=[]
-for t in tab_names:
-    cursor_sqlite.execute("SELECT name FROM sqlite_master WHERE type='table' AND name LIKE '%s'" % t)
-    get_tab = cursor_sqlite.fetchall()
+# for t in tab_names:
+cursor_sqlite.execute('SELECT name FROM sqlite_master WHERE type="table" AND name LIKE "%table%";')
+get_tab = cursor_sqlite.fetchall()
 for item in get_tab:
     tabnames.append(item[0])
 
@@ -54,6 +54,7 @@ for table in tabnames:
     colcount=len(rows[0])
     pholder='%s,'*colcount
     newholder=pholder[:-1]
+
  
     try:
         connect_postgre
