@@ -26,10 +26,10 @@ print("CONNECTION", type(connection))
 cursor = connection.cursor(cursor_factory=DictCursor)
 print("CURSOR", type(cursor))
 
-insertion_query = f"INSERT INTO titanic_table (Survived, Pclass, Name, Sex, Age, Siblings_Spouses_Aboard, Parents_Children_Aboard, Fare) VALUES %s"
+insertion_query = f"INSERT INTO titanic_table (Id, Survived, Pclass, Name, Sex, Age, Siblings_Spouses_Aboard, Parents_Children_Aboard, Fare) VALUES %s"
 # Convert DataFrame into a list of tuples and inserting data into titanic table   
 records = titanic_df.to_dict("records")
-list_of_tuples = [(r['Survived'], r['Pclass'], r['Name'], r['Sex'], r['Age'], r['Siblings/Spouses Aboard'], r['Parents/Children Aboard'], r['Fare']) for r in records]
+list_of_tuples = [(r['Id'], r['Survived'], r['Pclass'], r['Name'], r['Sex'], r['Age'], r['Siblings/Spouses Aboard'], r['Parents/Children Aboard'], r['Fare']) for r in records]
 # Invoking a function execute_values 
 execute_values(cursor, insertion_query, list_of_tuples)
 
@@ -104,3 +104,10 @@ print(query4)
 cursor.execute(query4)
 for row in cursor.fetchall():
     print(f"Survived: {row['survived']}, Pclass: {row['pclass']}, Name: {row['name']}, Parents_Children_Aboard: {row['parents_children_aboard']}")
+
+
+# ACTUALLY SAVE THE TRANSACTIONS
+connection.commit()
+
+cursor.close()
+connection.close()

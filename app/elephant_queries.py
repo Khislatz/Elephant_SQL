@@ -8,6 +8,7 @@ import pandas as pd
 import os
 import json
 
+
 load_dotenv() # reads the contents of the .env file and adds them to the environment
 
 DB_NAME = os.getenv("DB_NAME", default="OOPS.")
