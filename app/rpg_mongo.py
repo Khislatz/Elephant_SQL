@@ -119,4 +119,3 @@ strong = list(collection.find({'lvl': {"$gte": 70}}))
 # $gte = Matches values that are greater than or equal to a specified value.
 
 #TODO: also try to account for our mistakes "lvl" vs "level"
-breakpoint()
