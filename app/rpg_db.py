@@ -1,3 +1,5 @@
+## SQLITE INTO POSTGRESQL
+
 import psycopg2
 from psycopg2.extras import execute_values # to insert multiple values at a time 
 from psycopg2.extras import DictCursor
@@ -20,6 +22,7 @@ print("CURSOR", cursor_sqlite)
 
 load_dotenv() # reads the contents of the .env file and adds them to the environment
 
+# connect to postreSQL credentials 
 NAME = os.getenv("NAME", default="OOPS.")
 USER = os.getenv("USER", default="OOPS.")
 PASSWORD = os.getenv("PASSWORD", default="OOPS.")

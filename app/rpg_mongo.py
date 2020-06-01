@@ -3,22 +3,15 @@
 import pymongo
 import os
 from dotenv import load_dotenv
-import sqlite3
 
-DB_FILEPATH = os.path.join(os.path.dirname(__file__), "..", "app_data", "rpg_db.sqlite3")
-connect_sqlite = sqlite3.connect(DB_FILEPATH)
-connect_sqlite.row_factory = sqlite3.Row
-print("CONNECTION:", connect_sqlite)
-cursor_sqlite = connect_sqlite.cursor()
-print("CURSOR", cursor_sqlite)
 
 load_dotenv()
 
-DB_USER = os.getenv("MONGO_USER", default="OOPS")
-DB_PASSWORD = os.getenv("MONGO_PASSWORD", default="OOPS")
-CLUSTER_NAME = os.getenv("MONGO_CLUSTER_NAME", default="OOPS")
+MONGO_USER = os.getenv("MONGO_USER", default="OOPS")
+MONGO_PASSWORD = os.getenv("MONGO_PASSWORD", default="OOPS")
+MONGO_CLUSTER_NAME = os.getenv("MONGO_CLUSTER_NAME", default="OOPS")
 
-connection_uri = f"mongodb+srv://{DB_USER}:{DB_PASSWORD}@{CLUSTER_NAME}.mongodb.net/test?retryWrites=true&w=majority"
+connection_uri = f"mongodb+srv://{MONGO_USER}:{MONGO_PASSWORD}@{MONGO_CLUSTER_NAME}.mongodb.net/test?retryWrites=true&w=majority"
 print("----------------")
 print("URI:", connection_uri)
 
@@ -31,13 +24,13 @@ print("DB_NAMES:", client.database_names)
 
 
 #  db = client.test_database -- "test_database" is the name that we give to our new database
-db = client.rpg_db
+db = client.mongo_db 
 print("----------------")
 print("DB:", type(db), db)
 
 # collection = db.pokemon_test # "pokemon_test is a name of the collection or table 
 
-collection = db.rpg_collection 
+collection = db.pokemon_collection 
 print("----------------")
 print("COLLECTION:", type(collection), collection)
 
@@ -119,3 +112,4 @@ strong = list(collection.find({'lvl': {"$gte": 70}}))
 # $gte = Matches values that are greater than or equal to a specified value.
 
 #TODO: also try to account for our mistakes "lvl" vs "level"
+breakpoint()

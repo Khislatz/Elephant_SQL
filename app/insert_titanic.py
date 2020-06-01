@@ -8,6 +8,12 @@ import os
 import json
 # from sqlalchemy import create_engine
 
+# csv_filepath = r'C:\Users\Khisl\Desktop\Elephant_SQL\app_data\titanic.csv'
+csv_filepath = os.path.joint(os.path.dirname(__file__), "..", "app_data", "titanic_csv")
+titanic_df = pd.read_csv(csv_filepath) 
+print(titanic_df.head())
+print(titanic_df.dtypes)
+
 load_dotenv() # reads the contents of the .env file and adds them to the environment
 
 DB_NAME = os.getenv("DB_NAME", default="OOPS.")
@@ -17,8 +23,6 @@ DB_HOST = os.getenv("DB_HOST", default="OOPS.")
 
 #Connect to ElephantSQL-hosted PostgreSQL
 connection = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASSWORD, host=DB_HOST)
-
-titanic_df = pd.read_csv(r'C:\Users\Khisl\Desktop\Elephant_SQL\app_data\titanic.csv') 
 
 print("CONNECTION", type(connection))
 
